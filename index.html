@@ -49,6 +49,7 @@
     -webkit-font-smoothing: antialiased;
   }
   img { max-width: 100%; }
+  [hidden] { display: none !important; }
   h1, h2, h3 { text-wrap: balance; }
   p { text-wrap: pretty; }
   .wrap { max-width: 1160px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); }
@@ -307,40 +308,6 @@
   }
   @media (max-width: 820px) { .footer-grid { grid-template-columns: 1fr; } }
 
-  /* ---------- Popup de salida ---------- */
-  .modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 16px; }
-  .modal-backdrop { position: absolute; inset: 0; background: rgba(6, 10, 16, .66); }
-  .modal-card {
-    position: relative; width: 100%; max-width: 480px; max-height: calc(100% - 32px); overflow-y: auto;
-    background: var(--surface); color: var(--ink);
-    border-radius: 18px; padding: 32px 28px 26px;
-    box-shadow: 0 24px 80px rgba(0, 0, 0, .35);
-  }
-  .modal-card h2 {
-    margin: 0 0 10px; font-family: var(--display); font-stretch: 118%; font-weight: 800;
-    font-size: 26px; line-height: 1.12; letter-spacing: -.015em;
-  }
-  .modal-card > p { margin: 0 0 20px; color: var(--muted); }
-  .modal-x {
-    position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border-radius: 50%;
-    border: 0; background: var(--paper-2); color: var(--ink); cursor: pointer; font-size: 22px; line-height: 1;
-  }
-  .modal-form { display: grid; gap: 10px; }
-  .modal-form input {
-    width: 100%; min-height: 48px; padding: 0 16px;
-    border: 1.5px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink);
-    font-family: var(--body); font-size: 16px;
-  }
-  .modal-form input:focus { border-color: var(--volt-ink); outline: none; }
-  .form-error { margin: 0; font-size: 13.5px; color: #B42318; }
-  .fine { margin: 2px 0 0; font-size: 12.5px; color: var(--muted); }
-  .checklist { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
-  .checklist li { position: relative; padding-left: 30px; font-size: 15px; line-height: 1.45; }
-  .checklist li::before {
-    content: ""; position: absolute; left: 0; top: 2px; width: 18px; height: 18px; border-radius: 5px;
-    border: 2px solid var(--volt-ink);
-  }
-  .done-title { margin: 0 0 14px; font-weight: 600; }
 </style>
 </head>
 <body>
@@ -571,7 +538,7 @@
       <a href="#cargadores">Cargadores</a>
       <a href="#antes">Antes de comprar</a>
       <a href="#tiempos">Tiempos de carga</a>
-      <button class="link-btn" type="button" id="abrir-checklist">Checklist gratis</button>
+      <a href="#preguntas">Preguntas</a>
     </nav>
     <div class="legal">
       <p><strong>En calidad de Afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables.</strong></p>
@@ -581,48 +548,13 @@
   <div class="wrap footer-bottom">© 2026 Enchufa</div>
 </footer>
 
-<div class="modal" id="popup" hidden>
-  <div class="modal-backdrop" data-cerrar></div>
-  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="popup-titulo">
-    <button class="modal-x" type="button" data-cerrar aria-label="Cerrar">×</button>
-    <p class="kicker">Antes de irte</p>
-    <h2 id="popup-titulo">La checklist para elegir cargador sin equivocarte</h2>
-    <div id="popup-paso1">
-      <p style="margin:0 0 20px;color:var(--muted)">Siete comprobaciones que conviene hacer antes de comprar. Déjanos tu email y te la enseñamos ahora mismo.</p>
-      <form class="modal-form" id="popup-form" novalidate>
-        <label for="popup-email" class="sr-only">Tu email</label>
-        <input id="popup-email" name="email" type="email" placeholder="tu@email.com" autocomplete="email" required>
-        <button class="btn btn-primary" type="submit">Ver la checklist</button>
-        <p class="form-error" id="popup-error" hidden>Escribe un email válido, por ejemplo nombre@gmail.com.</p>
-        <p class="fine">Al suscribirte aceptas recibir emails de Enchufa. Puedes darte de baja cuando quieras.</p>
-      </form>
-    </div>
-    <div id="popup-paso2" hidden>
-      <p class="done-title">Aquí la tienes. Hazle una captura para tenerla a mano:</p>
-      <ul class="checklist">
-        <li>Tu coche carga con conector Tipo 2.</li>
-        <li>Sabes qué potencia tienes contratada. Si es baja, eliges un cargador con gestión dinámica para que no salte la luz.</li>
-        <li>Has medido la distancia del cuadro eléctrico a tu plaza. El electricista la necesita para el presupuesto.</li>
-        <li>Has medido de la pared a la toma del coche para elegir cable de 5 o de 7 metros.</li>
-        <li>Tienes el presupuesto de un electricista autorizado que te entregará el boletín.</li>
-        <li>Si aparcas en un garaje comunitario, lo comunicas por escrito a la comunidad antes de instalar.</li>
-        <li>Vas a programar la carga en horas valle, cuando la luz es más barata.</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
 <script>
   // ================= CONFIGURACIÓN =================
   // 1) Pegá acá tu ID de afiliada de Amazon.es (lo ves arriba a la derecha en afiliados.amazon.es).
   //    Ejemplo: "enchufa-21". Mientras esté vacío, los botones llevan a Amazon sin tu ID y no cobrás comisión.
   const AMAZON_TAG = "";
 
-  // 2) Opcional: dirección de tu formulario de suscriptores (Brevo, Mailchimp, Formspree...).
-  //    Vacío = el popup muestra la checklist pero no guarda el email en ningún lado.
-  const NEWSLETTER_URL = "";
-
-  // 3) Productos. Para agregar uno, copiá un bloque y cambiá el ASIN (el código que aparece en la URL de Amazon: /dp/XXXXXXXXXX).
+  // 2) Productos. Para agregar uno, copiá un bloque y cambiá el ASIN (el código que aparece en la URL de Amazon: /dp/XXXXXXXXXX).
   //    En "img" podés pegar el link de la imagen que te da la barra de afiliados de Amazon. Vacío = dibujo.
   const PRODUCTOS = [
     {
@@ -723,51 +655,6 @@
   }
   rango.addEventListener("input", calcular);
   calcular();
-
-  // ---------- Popup de salida (suscriptores) ----------
-  const modal = $("#popup"), form = $("#popup-form"), email = $("#popup-email"), error = $("#popup-error");
-  let yaMostrado = false, focoPrevio = null;
-  const leerSesion = () => { try { return sessionStorage.getItem("enchufa_popup") === "1"; } catch (e) { return false; } };
-  const guardarSesion = () => { try { sessionStorage.setItem("enchufa_popup", "1"); } catch (e) {} };
-
-  function abrirPopup(forzar = false) {
-    if (!forzar && (yaMostrado || leerSesion())) return;
-    yaMostrado = true; guardarSesion();
-    focoPrevio = document.activeElement;
-    modal.hidden = false;
-    ( $("#popup-paso2").hidden ? email : $(".modal-x", modal) ).focus();
-  }
-  function cerrarPopup() {
-    modal.hidden = true;
-    if (focoPrevio && focoPrevio.focus) focoPrevio.focus();
-  }
-  modal.addEventListener("click", (e) => { if (e.target.closest("[data-cerrar]")) cerrarPopup(); });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.hidden) cerrarPopup(); });
-  $("#abrir-checklist").addEventListener("click", () => abrirPopup(true));
-
-  // Escritorio: cuando el cursor sale por arriba de la ventana (solo después de 8 s y de que la persona haya movido el ratón).
-  // Móvil: a los 45 segundos.
-  let armado = false, tiempoOk = false;
-  setTimeout(() => { tiempoOk = true; }, 8000);
-  document.addEventListener("mousemove", (e) => { if (e.clientY > 60) armado = true; }, { passive: true });
-  document.addEventListener("mouseout", (e) => {
-    if (armado && tiempoOk && !e.relatedTarget && e.clientY <= 0) abrirPopup();
-  });
-  if (window.matchMedia && matchMedia("(pointer: coarse)").matches) setTimeout(() => abrirPopup(), 45000);
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const valor = email.value.trim();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(valor)) { error.hidden = false; email.focus(); return; }
-    error.hidden = true;
-    if (NEWSLETTER_URL) {
-      const datos = new FormData(); datos.append("email", valor);
-      fetch(NEWSLETTER_URL, { method: "POST", body: datos, mode: "no-cors" }).catch(() => {});
-    }
-    $("#popup-paso1").hidden = true;
-    $("#popup-paso2").hidden = false;
-    $(".modal-x", modal).focus();
-  });
 </script>
 </body>
 </html>
