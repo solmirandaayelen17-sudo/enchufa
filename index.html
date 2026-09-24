@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Wallbox y cargadores portátiles para coche eléctrico que puedes comprar en Amazon, explicados sin jerga: qué potencia necesitas, qué cable elegir y cuánto tarda en cargar.">
+<meta property="og:title" content="Enchufa · Cargadores para coche eléctrico">
+<meta property="og:description" content="Qué wallbox o cargador portátil comprar, cuánto tarda en cargar y qué mirar antes de instalarlo.">
+<meta property="og:type" content="website">
+<title>Enchufa</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M22 16H78A45.6 45.6 0 1 1 22 16Z' fill='%231E88FF'/%3E%3Cg fill='%230B0F14'%3E%3Ccircle cx='38' cy='31' r='5'/%3E%3Ccircle cx='62' cy='31' r='5'/%3E%3Ccircle cx='27' cy='53' r='8'/%3E%3Ccircle cx='50' cy='53' r='8'/%3E%3Ccircle cx='73' cy='53' r='8'/%3E%3Ccircle cx='38' cy='76' r='8'/%3E%3Ccircle cx='62' cy='76' r='8'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --graphite: #0B0F14;
+    --graphite-2: #121922;
+    --graphite-3: #1E2833;
+    --volt: #1E88FF;
+    --volt-ink: #0A66D6;
+    --volt-ink-hover: #0856B6;
+    --spark: #FFD600;
+    --paper: #F2F5F9;
+    --paper-2: #E7EDF4;
+    --surface: #FFFFFF;
+    --ink: #0B0F14;
+    --muted: #536172;
+    --line: #D8E0EA;
+    --bar: #B4C1D0;
+    --on-dark: #EEF3F8;
+    --on-dark-muted: #9AA8B8;
+    --radius: 14px;
+    --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    color-scheme: light;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  .wrap { max-width: 1160px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--spark);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Botones ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 46px; padding: 0 22px;
+    border: 0; border-radius: 999px; cursor: pointer;
+    font-family: var(--body); font-size: 15px; font-weight: 600; line-height: 1.2;
+    text-decoration: none; white-space: nowrap;
+    transition: background-color .15s ease, box-shadow .15s ease;
+  }
+  .btn svg { width: 16px; height: 16px; flex: none; }
+  .btn-primary { background: var(--volt-ink); color: #fff; }
+  .btn-primary:hover { background: var(--volt-ink-hover); }
+  .btn-ghost { background: transparent; color: var(--on-dark); box-shadow: inset 0 0 0 1.5px rgba(238, 243, 248, .34); }
+  .btn-ghost:hover { box-shadow: inset 0 0 0 1.5px var(--on-dark); }
+  .btn-sm { min-height: 40px; padding: 0 16px; font-size: 14px; }
+
+  /* ---------- Cabecera ---------- */
+  .site-header {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30;
+    background: rgba(11, 15, 20, .94);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, .07);
+  }
+  .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 64px; }
+  .brand {
+    display: inline-flex; align-items: center; gap: 10px;
+    color: var(--on-dark); text-decoration: none;
+    font-family: var(--display); font-stretch: 125%; font-weight: 800; font-size: 21px; letter-spacing: -.01em;
+  }
+  .brand svg { width: 28px; height: 28px; flex: none; }
+  .nav { display: flex; gap: 28px; }
+  .nav a { color: var(--on-dark-muted); text-decoration: none; font-size: 14.5px; font-weight: 500; }
+  .nav a:hover { color: var(--on-dark); }
+  @media (max-width: 800px) { .nav { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; isolation: isolate; overflow: hidden;
+    background-color: var(--graphite); color: var(--on-dark);
+  }
+  /* Para usar una foto de fondo: definí --hero-photo en .hero, ej. style="--hero-photo: url(foto.jpg)" */
+  .hero::before {
+    content: ""; position: absolute; inset: 0; z-index: -2;
+    background: var(--hero-photo, radial-gradient(55% 75% at 80% 45%, #0F3566 0%, rgba(11, 15, 20, 0) 72%));
+    background-size: cover; background-position: center;
+  }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(3, 24, 52, .18); }
+  .hero-grid {
+    display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+    gap: clamp(32px, 5vw, 64px); align-items: center;
+    padding-block: clamp(56px, 8vw, 104px);
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px; margin: 0 0 20px;
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--on-dark-muted);
+  }
+  .eyebrow svg { width: 14px; height: 14px; color: var(--spark); }
+  .hero h1 {
+    margin: 0 0 20px;
+    font-family: var(--display); font-stretch: 125%; font-weight: 800;
+    font-size: clamp(36px, 5.4vw, 62px); line-height: 1.02; letter-spacing: -.025em;
+    text-shadow: 0 1px 24px rgba(0, 0, 0, .25);
+  }
+  .hero h1 em { font-style: normal; color: var(--volt); }
+  .hero-sub { margin: 0 0 32px; max-width: 34em; font-size: clamp(16px, 1.6vw, 18.5px); color: #C9D3DE; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 40px; }
+
+  .readout {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px;
+    padding: 14px 16px; max-width: 520px;
+    background: rgba(6, 12, 20, .72); border: 1px solid var(--graphite-3); border-radius: 12px;
+  }
+  .readout-screen {
+    display: flex; gap: 18px;
+    font-family: var(--mono); font-size: 13px; color: var(--on-dark-muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .readout-screen b { font-weight: 500; font-size: 22px; color: var(--volt); margin-right: 3px; }
+  .readout p { margin: 0; flex: 1 1 200px; font-size: 13.5px; line-height: 1.45; color: var(--on-dark-muted); }
+
+  .hero-visual { margin: 0; justify-self: center; width: 100%; max-width: 420px; }
+  .hero-visual svg { display: block; width: 100%; height: auto; }
+  .hero-visual figcaption {
+    margin-top: 10px; text-align: center;
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--on-dark-muted);
+  }
+  .charge-arc { stroke-dasharray: 942.5; stroke-dashoffset: 188.5; animation: fill-arc 2.2s cubic-bezier(.3, .7, .2, 1) .3s backwards; }
+  .charge-glow { animation: fill-arc 2.2s cubic-bezier(.3, .7, .2, 1) .3s backwards, breathe 3.2s ease-in-out 2.5s infinite; }
+  @keyframes fill-arc { from { stroke-dashoffset: 942.5; } }
+  @keyframes breathe { 0%, 100% { opacity: .55; } 50% { opacity: .95; } }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .charge-arc, .charge-glow { animation: none; }
+  }
+  @media (max-width: 880px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-visual { max-width: 280px; }
+  }
+
+  /* ---------- Secciones ---------- */
+  .section { padding-block: clamp(56px, 8vw, 96px); }
+  .section-head { max-width: 680px; margin-bottom: clamp(28px, 4vw, 44px); }
+  .kicker {
+    margin: 0 0 10px;
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--volt-ink);
+  }
+  .section h2 {
+    margin: 0 0 14px;
+    font-family: var(--display); font-stretch: 125%; font-weight: 800;
+    font-size: clamp(28px, 3.6vw, 40px); line-height: 1.08; letter-spacing: -.02em;
+  }
+  .lede { margin: 0; font-size: 17px; color: var(--muted); max-width: 62ch; }
+  .disclosure { margin: 14px 0 0; font-size: 13.5px; color: var(--muted); }
+
+  /* ---------- Tarjetas de producto ---------- */
+  .grid {
+    display: grid; gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 310px), 1fr));
+  }
+  .card {
+    display: flex; flex-direction: column;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .card-media {
+    position: relative; aspect-ratio: 16 / 10; max-width: 100%;
+    display: grid; place-items: center; background: var(--paper-2);
+  }
+  .card-media svg { width: 64%; height: auto; }
+  .card-media img { width: 100%; height: 100%; object-fit: contain; padding: 18px; background: #fff; }
+  .badge {
+    position: absolute; top: 12px; left: 12px;
+    padding: 4px 10px; border-radius: 999px;
+    font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+    background: var(--graphite); color: var(--on-dark);
+  }
+  .badge.is-top { background: var(--spark); color: var(--graphite); }
+  .card-body { display: flex; flex-direction: column; gap: 14px; flex: 1; padding: 20px 20px 22px; }
+  .card-title { display: grid; gap: 4px; }
+  .card-brand {
+    margin: 0; font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+  }
+  .card h3 {
+    margin: 0; font-family: var(--display); font-stretch: 112%; font-weight: 700;
+    font-size: 19px; line-height: 1.2; letter-spacing: -.01em;
+  }
+  .specs { margin: 0; border-top: 1px solid var(--line); }
+  .specs div {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px;
+  }
+  .specs dt { color: var(--muted); }
+  .specs dd {
+    margin: 0; text-align: right;
+    font-family: var(--mono); font-size: 13px; font-variant-numeric: tabular-nums;
+  }
+  .card-ideal { margin: 0; font-size: 15px; line-height: 1.5; }
+  .card-ideal strong { font-weight: 700; }
+  .card-note { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--muted); }
+  .btn-buy { margin-top: auto; width: 100%; }
+
+  /* ---------- Antes de comprar ---------- */
+  .before { background: var(--surface); border-block: 1px solid var(--line); }
+  .tips {
+    display: grid; gap: clamp(24px, 3vw, 40px);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+  }
+  .tip { border-top: 2px solid var(--graphite); padding-top: 20px; }
+  .tip-read {
+    display: inline-block; margin-bottom: 14px; padding: 6px 12px; border-radius: 8px;
+    background: var(--graphite); color: var(--volt);
+    font-family: var(--mono); font-size: 15px; font-weight: 500; font-variant-numeric: tabular-nums;
+  }
+  .tip h3 {
+    margin: 0 0 8px; font-family: var(--display); font-stretch: 112%; font-weight: 700;
+    font-size: 19px; line-height: 1.25;
+  }
+  .tip p { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+  /* ---------- Calculadora ---------- */
+  .calc {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: clamp(20px, 3vw, 32px);
+  }
+  .calc-control { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 6px 16px; margin-bottom: 18px; max-width: 560px; }
+  .calc-control label { font-weight: 600; }
+  .calc-control output {
+    font-family: var(--mono); font-size: 22px; font-weight: 500; color: var(--volt-ink); font-variant-numeric: tabular-nums;
+  }
+  .calc-control input { grid-column: 1 / -1; width: 100%; accent-color: var(--volt-ink); margin: 6px 0 0; }
+  .calc-scale { grid-column: 1 / -1; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .row {
+    display: grid; grid-template-columns: minmax(160px, 220px) minmax(0, 1fr) 150px;
+    gap: 8px 20px; align-items: center;
+    padding-block: 16px; border-top: 1px solid var(--line);
+  }
+  .row-label strong, .row-val strong { display: block; font-size: 15.5px; }
+  .row-label span, .row-val span { display: block; font-size: 13px; color: var(--muted); font-family: var(--mono); }
+  .row-val { text-align: right; font-variant-numeric: tabular-nums; }
+  .row-val strong { font-family: var(--mono); font-weight: 500; }
+  .bar { height: 12px; border-radius: 999px; background: var(--paper-2); overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--bar); transition: width .35s ease; }
+  .row.is-pick .bar i { background: var(--volt); }
+  .row.is-pick .row-val strong { color: var(--volt-ink); }
+  .calc-foot { margin: 16px 0 0; font-size: 13.5px; color: var(--muted); max-width: 70ch; }
+  @media (max-width: 640px) {
+    .row { grid-template-columns: minmax(0, 1fr) auto; }
+    .bar { grid-column: 1 / -1; grid-row: 2; }
+  }
+  @media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+
+  /* ---------- Preguntas ---------- */
+  .faq { max-width: 780px; border-top: 1px solid var(--line); }
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq summary {
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    padding: 18px 0; cursor: pointer; list-style: none;
+    font-family: var(--display); font-stretch: 112%; font-weight: 700; font-size: 18px; line-height: 1.3;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+"; flex: none; width: 28px; height: 28px; border-radius: 50%;
+    display: grid; place-items: center; background: var(--paper-2); color: var(--ink);
+    font-family: var(--mono); font-size: 18px; font-weight: 500;
+  }
+  .faq details[open] summary::after { content: "−"; }
+  .faq details p { margin: 0 0 20px; color: var(--muted); max-width: 64ch; }
+
+  /* ---------- Pie ---------- */
+  .site-footer { background: var(--graphite); color: var(--on-dark-muted); font-size: 14.5px; }
+  .footer-grid {
+    display: grid; gap: 32px 48px; padding-block: 56px 36px;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr) minmax(0, 1fr);
+  }
+  .footer-grid p { margin: 12px 0 0; max-width: 40ch; }
+  .footer-links { display: grid; gap: 10px; align-content: start; }
+  .footer-links a, .link-btn { color: var(--on-dark); text-decoration: none; font: inherit; }
+  .footer-links a:hover, .link-btn:hover { color: var(--volt); }
+  .link-btn { background: none; border: 0; padding: 0; cursor: pointer; text-align: left; }
+  .legal p { margin: 0 0 12px; font-size: 13.5px; line-height: 1.55; }
+  .legal strong { color: var(--on-dark); font-weight: 600; }
+  .footer-bottom {
+    padding-block: 18px 28px; border-top: 1px solid var(--graphite-3);
+    font-family: var(--mono); font-size: 12.5px;
+  }
+  @media (max-width: 820px) { .footer-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Popup de salida ---------- */
+  .modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 16px; }
+  .modal-backdrop { position: absolute; inset: 0; background: rgba(6, 10, 16, .66); }
+  .modal-card {
+    position: relative; width: 100%; max-width: 480px; max-height: calc(100% - 32px); overflow-y: auto;
+    background: var(--surface); color: var(--ink);
+    border-radius: 18px; padding: 32px 28px 26px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, .35);
+  }
+  .modal-card h2 {
+    margin: 0 0 10px; font-family: var(--display); font-stretch: 118%; font-weight: 800;
+    font-size: 26px; line-height: 1.12; letter-spacing: -.015em;
+  }
+  .modal-card > p { margin: 0 0 20px; color: var(--muted); }
+  .modal-x {
+    position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border-radius: 50%;
+    border: 0; background: var(--paper-2); color: var(--ink); cursor: pointer; font-size: 22px; line-height: 1;
+  }
+  .modal-form { display: grid; gap: 10px; }
+  .modal-form input {
+    width: 100%; min-height: 48px; padding: 0 16px;
+    border: 1.5px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink);
+    font-family: var(--body); font-size: 16px;
+  }
+  .modal-form input:focus { border-color: var(--volt-ink); outline: none; }
+  .form-error { margin: 0; font-size: 13.5px; color: #B42318; }
+  .fine { margin: 2px 0 0; font-size: 12.5px; color: var(--muted); }
+  .checklist { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  .checklist li { position: relative; padding-left: 30px; font-size: 15px; line-height: 1.45; }
+  .checklist li::before {
+    content: ""; position: absolute; left: 0; top: 2px; width: 18px; height: 18px; border-radius: 5px;
+    border: 2px solid var(--volt-ink);
+  }
+  .done-title { margin: 0 0 14px; font-weight: 600; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13.5 2 4 13.5h6.5L9.5 22 20 9.5h-6.8L13.5 2Z" fill="currentColor"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-type2" viewBox="0 0 100 100">
+      <path d="M22 16H78A45.6 45.6 0 1 1 22 16Z" fill="#1E88FF"/>
+      <g fill="#0B0F14"><circle cx="38" cy="31" r="5"/><circle cx="62" cy="31" r="5"/><circle cx="27" cy="53" r="8"/><circle cx="50" cy="53" r="8"/><circle cx="73" cy="53" r="8"/><circle cx="38" cy="76" r="8"/><circle cx="62" cy="76" r="8"/></g>
+    </symbol>
+    <symbol id="ill-wallbox" viewBox="0 0 160 100">
+      <rect x="57" y="10" width="46" height="58" rx="11" fill="#FFFFFF" stroke="#BFCBD8" stroke-width="2"/>
+      <circle cx="80" cy="36" r="12" fill="none" stroke="#1E88FF" stroke-width="3.5"/>
+      <circle cx="80" cy="36" r="3.2" fill="#1E88FF"/>
+      <rect x="70" y="56" width="20" height="3" rx="1.5" fill="#D8E0EA"/>
+      <path d="M80 68C80 94 128 96 128 74" fill="none" stroke="#1E2833" stroke-width="5" stroke-linecap="round"/>
+      <rect x="120" y="54" width="16" height="22" rx="6" fill="#1E2833"/>
+      <rect x="123" y="50" width="10" height="6" rx="2" fill="#3A4756"/>
+    </symbol>
+    <symbol id="ill-portatil" viewBox="0 0 160 100">
+      <path d="M56 50C38 50 38 72 26 72" fill="none" stroke="#1E2833" stroke-width="4.5" stroke-linecap="round"/>
+      <path d="M104 50C122 50 124 74 136 74" fill="none" stroke="#1E2833" stroke-width="4.5" stroke-linecap="round"/>
+      <circle cx="18" cy="72" r="11" fill="#1E2833"/>
+      <circle cx="14" cy="72" r="2" fill="#9AA8B8"/><circle cx="22" cy="72" r="2" fill="#9AA8B8"/>
+      <rect x="132" y="63" width="18" height="22" rx="6" fill="#1E2833"/>
+      <rect x="54" y="30" width="52" height="40" rx="10" fill="#FFFFFF" stroke="#BFCBD8" stroke-width="2"/>
+      <rect x="63" y="40" width="24" height="13" rx="2.5" fill="#0B0F14"/>
+      <rect x="66" y="45" width="12" height="3" rx="1" fill="#1E88FF"/>
+      <circle cx="96" cy="46.5" r="3.5" fill="#1E88FF"/>
+      <rect x="63" y="58" width="34" height="3" rx="1.5" fill="#D8E0EA"/>
+    </symbol>
+    <symbol id="ill-medidor" viewBox="0 0 160 100">
+      <rect x="24" y="44" width="112" height="10" rx="2" fill="#C9D3DE"/>
+      <rect x="62" y="14" width="36" height="72" rx="5" fill="#FFFFFF" stroke="#BFCBD8" stroke-width="2"/>
+      <rect x="68" y="26" width="24" height="14" rx="2" fill="#0B0F14"/>
+      <rect x="71" y="31.5" width="14" height="3" rx="1" fill="#1E88FF"/>
+      <circle cx="71" cy="19.5" r="2.4" fill="#9AA8B8"/><circle cx="80" cy="19.5" r="2.4" fill="#9AA8B8"/><circle cx="89" cy="19.5" r="2.4" fill="#9AA8B8"/>
+      <circle cx="71" cy="80.5" r="2.4" fill="#9AA8B8"/><circle cx="80" cy="80.5" r="2.4" fill="#9AA8B8"/><circle cx="89" cy="80.5" r="2.4" fill="#9AA8B8"/>
+      <path d="M80 86V96" stroke="#1E2833" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Enchufa, inicio">
+      <svg aria-hidden="true"><use href="#i-type2"/></svg>
+      Enchufa
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#cargadores">Cargadores</a>
+      <a href="#antes">Antes de comprar</a>
+      <a href="#tiempos">Tiempos de carga</a>
+      <a href="#preguntas">Preguntas</a>
+    </nav>
+    <a class="btn btn-primary btn-sm" href="#cargadores">Ver cargadores</a>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow"><svg aria-hidden="true"><use href="#i-bolt"/></svg>Cargadores para coche eléctrico</p>
+        <h1>Carga tu coche en casa <em>mientras duermes.</em></h1>
+        <p class="hero-sub">Wallbox y cargadores portátiles que puedes comprar en Amazon, explicados sin jerga: qué potencia necesitas, qué cable elegir y cuánto tarda de verdad.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#cargadores">Ver cargadores</a>
+          <a class="btn btn-ghost" href="#tiempos">Calcular tiempo de carga</a>
+        </div>
+        <div class="readout">
+          <div class="readout-screen" aria-label="7,4 kilovatios, 32 amperios, 230 voltios">
+            <span><b>7,4</b>kW</span><span><b>32</b>A</span><span><b>230</b>V</span>
+          </div>
+          <p>Lo que necesita la mayoría de casas: unos 44 km de autonomía por cada hora de carga.</p>
+        </div>
+      </div>
+
+      <figure class="hero-visual">
+        <svg viewBox="0 0 400 400" role="img" aria-label="Toma de carga Tipo 2 con el indicador de carga al 80 %">
+          <defs>
+            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/></filter>
+          </defs>
+          <circle cx="200" cy="200" r="178" fill="#0E151D" stroke="#1E2833" stroke-width="2"/>
+          <circle cx="200" cy="200" r="150" fill="none" stroke="#1B2530" stroke-width="10"/>
+          <circle class="charge-glow" cx="200" cy="200" r="150" fill="none" stroke="#1E88FF" stroke-width="12" stroke-linecap="round"
+                  stroke-dasharray="942.5" stroke-dashoffset="188.5" transform="rotate(-90 200 200)" filter="url(#glow)" opacity=".75"/>
+          <circle class="charge-arc" cx="200" cy="200" r="150" fill="none" stroke="#1E88FF" stroke-width="10" stroke-linecap="round"
+                  transform="rotate(-90 200 200)"/>
+          <g transform="translate(70 68) scale(2.6)">
+            <path d="M22 16H78A45.6 45.6 0 1 1 22 16Z" fill="#18212C" stroke="#2C3A4A" stroke-width="1.2"/>
+            <g fill="#06090D">
+              <circle cx="38" cy="31" r="5"/><circle cx="62" cy="31" r="5"/>
+              <circle cx="27" cy="53" r="8.4"/><circle cx="50" cy="53" r="8.4"/><circle cx="73" cy="53" r="8.4"/>
+              <circle cx="38" cy="76" r="8.4"/><circle cx="62" cy="76" r="8.4"/>
+            </g>
+            <g fill="#8D99A8">
+              <circle cx="38" cy="31" r="2.1"/><circle cx="62" cy="31" r="2.1"/>
+              <circle cx="27" cy="53" r="3.6"/><circle cx="50" cy="53" r="3.6"/><circle cx="73" cy="53" r="3.6"/>
+              <circle cx="38" cy="76" r="3.6"/><circle cx="62" cy="76" r="3.6"/>
+            </g>
+          </g>
+          <text x="200" y="372" text-anchor="middle" fill="#9AA8B8" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="2">80 %</text>
+        </svg>
+        <figcaption>Conector Tipo 2 · IEC 62196-2</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="cargadores" class="section">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">Cargadores seleccionados</p>
+        <h2>De la pared al maletero</h2>
+        <p class="lede">Wallbox fijos para cargar cada noche en tu garaje y cargadores portátiles que se enchufan a una toma normal. Todos usan conector Tipo 2, el estándar de los coches vendidos en Europa.</p>
+        <p class="disclosure">Enlaces de afiliado: si compras a través de ellos, Enchufa recibe una pequeña comisión y a ti te cuesta lo mismo. El precio final lo ves siempre en Amazon.</p>
+      </header>
+      <div class="grid" id="productos"></div>
+    </div>
+  </section>
+
+  <section id="antes" class="section before">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">Antes de comprar</p>
+        <h2>Tres cosas que conviene saber</h2>
+      </header>
+      <div class="tips">
+        <article class="tip">
+          <span class="tip-read">7,4 kW</span>
+          <h3>Para casi todas las casas basta un cargador monofásico de 7,4 kW</h3>
+          <p>Recupera unos 44 km de autonomía por hora, así que en una noche repones de sobra lo que gastas en un día normal. Los cargadores de 11 o 22 kW solo rinden si tu casa tiene instalación trifásica.</p>
+        </article>
+        <article class="tip">
+          <span class="tip-read">Boletín</span>
+          <h3>Un wallbox fijo lo instala un electricista autorizado</h3>
+          <p>Va en un circuito propio desde el cuadro eléctrico. Al terminar, el electricista te entrega el certificado de instalación (el boletín). Sin él, la instalación no es legal y el seguro puede no cubrirte.</p>
+        </article>
+        <article class="tip">
+          <span class="tip-read">5 m · 7 m</span>
+          <h3>Mide la distancia hasta el coche para elegir el cable</h3>
+          <p>Mide desde donde irá el cargador hasta la toma de carga del coche, con el coche aparcado como siempre. Si con 5 metros vas justo, elige el cable de 7.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="tiempos" class="section">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">Tiempos de carga</p>
+        <h2>¿Cuánto tarda en cargar?</h2>
+        <p class="lede">Mueve el control hasta el tamaño de la batería de tu coche y compara cuánto tarda cada tipo de cargador en llevarla del 20 % al 80 %.</p>
+      </header>
+      <div class="calc">
+        <div class="calc-control">
+          <label for="bateria">Batería de tu coche</label>
+          <output id="bateria-out" for="bateria">60 kWh</output>
+          <input type="range" id="bateria" min="30" max="100" step="1" value="60">
+          <div class="calc-scale" aria-hidden="true"><span>30 kWh</span><span>100 kWh</span></div>
+        </div>
+        <div id="filas">
+          <div class="row" data-kw="2.3">
+            <div class="row-label"><strong>Enchufe normal</strong><span>Schuko 10 A · 2,3 kW</span></div>
+            <div class="bar"><i></i></div>
+            <div class="row-val"><strong>17 h 25 min</strong><span>14 km por hora</span></div>
+          </div>
+          <div class="row" data-kw="3.7">
+            <div class="row-label"><strong>Cargador portátil</strong><span>Schuko 16 A · 3,7 kW</span></div>
+            <div class="bar"><i></i></div>
+            <div class="row-val"><strong>10 h 50 min</strong><span>22 km por hora</span></div>
+          </div>
+          <div class="row is-pick" data-kw="7.4">
+            <div class="row-label"><strong>Wallbox</strong><span>Monofásico 32 A · 7,4 kW</span></div>
+            <div class="bar"><i></i></div>
+            <div class="row-val"><strong>5 h 25 min</strong><span>44 km por hora</span></div>
+          </div>
+          <div class="row" data-kw="11">
+            <div class="row-label"><strong>Wallbox trifásico</strong><span>3 × 16 A · 11 kW</span></div>
+            <div class="bar"><i></i></div>
+            <div class="row-val"><strong>3 h 40 min</strong><span>66 km por hora</span></div>
+          </div>
+        </div>
+        <p class="calc-foot">Estimación con un 90 % de eficiencia y un consumo de 15 kWh cada 100 km. El trifásico solo sirve si tu casa tiene suministro trifásico y tu coche acepta 11 kW en alterna. Tu coche también puede limitar la potencia que acepta.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="preguntas" class="section before">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker">Preguntas frecuentes</p>
+        <h2>Lo que más nos preguntan</h2>
+      </header>
+      <div class="faq">
+        <details>
+          <summary>¿Estos cargadores sirven para mi coche?</summary>
+          <p>Si tu coche se vendió en Europa, casi seguro que carga en alterna con conector Tipo 2, incluidos los Tesla europeos. Todos los cargadores de esta página usan ese conector. Si tienes dudas, mira la tapa de carga: el Tipo 2 tiene siete orificios, dos pequeños arriba y cinco grandes.</p>
+        </details>
+        <details>
+          <summary>¿Puedo instalar el wallbox yo mismo?</summary>
+          <p>No. Un wallbox fijo necesita un circuito propio con sus protecciones y lo tiene que instalar un electricista autorizado, que te entrega el boletín. Los cargadores portátiles no necesitan instalación: se enchufan a una toma Schuko en buen estado.</p>
+        </details>
+        <details>
+          <summary>¿Wallbox o cargador portátil?</summary>
+          <p>Si cargas en casa casi todos los días y tienes plaza propia, el wallbox carga el doble de rápido que un portátil y se controla desde el móvil. El portátil encaja si vives de alquiler, no puedes hacer obra o quieres un cargador de repuesto para los viajes.</p>
+        </details>
+        <details>
+          <summary>Vivo en un piso con garaje comunitario, ¿necesito permiso?</summary>
+          <p>Para un punto de recarga de uso privado en tu plaza no necesitas que lo apruebe la junta: basta con comunicarlo por escrito a la comunidad antes de instalarlo (Ley de Propiedad Horizontal, artículo 17.5). El coste de la instalación corre de tu cuenta.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <a class="brand" href="#inicio">
+        <svg aria-hidden="true"><use href="#i-type2"/></svg>
+        Enchufa
+      </a>
+      <p>Guías y comparativas de cargadores para coche eléctrico. Elegimos productos que se venden en Amazon.es y explicamos para quién es cada uno.</p>
+    </div>
+    <nav class="footer-links" aria-label="Pie de página">
+      <a href="#cargadores">Cargadores</a>
+      <a href="#antes">Antes de comprar</a>
+      <a href="#tiempos">Tiempos de carga</a>
+      <button class="link-btn" type="button" id="abrir-checklist">Checklist gratis</button>
+    </nav>
+    <div class="legal">
+      <p><strong>En calidad de Afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables.</strong></p>
+      <p>Amazon y el logotipo de Amazon son marcas registradas de Amazon.com, Inc. o sus afiliados. Los precios y la disponibilidad pueden cambiar; el precio final es el que ves en Amazon.es.</p>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">© 2026 Enchufa</div>
+</footer>
+
+<div class="modal" id="popup" hidden>
+  <div class="modal-backdrop" data-cerrar></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="popup-titulo">
+    <button class="modal-x" type="button" data-cerrar aria-label="Cerrar">×</button>
+    <p class="kicker">Antes de irte</p>
+    <h2 id="popup-titulo">La checklist para elegir cargador sin equivocarte</h2>
+    <div id="popup-paso1">
+      <p style="margin:0 0 20px;color:var(--muted)">Siete comprobaciones que conviene hacer antes de comprar. Déjanos tu email y te la enseñamos ahora mismo.</p>
+      <form class="modal-form" id="popup-form" novalidate>
+        <label for="popup-email" class="sr-only">Tu email</label>
+        <input id="popup-email" name="email" type="email" placeholder="tu@email.com" autocomplete="email" required>
+        <button class="btn btn-primary" type="submit">Ver la checklist</button>
+        <p class="form-error" id="popup-error" hidden>Escribe un email válido, por ejemplo nombre@gmail.com.</p>
+        <p class="fine">Al suscribirte aceptas recibir emails de Enchufa. Puedes darte de baja cuando quieras.</p>
+      </form>
+    </div>
+    <div id="popup-paso2" hidden>
+      <p class="done-title">Aquí la tienes. Hazle una captura para tenerla a mano:</p>
+      <ul class="checklist">
+        <li>Tu coche carga con conector Tipo 2.</li>
+        <li>Sabes qué potencia tienes contratada. Si es baja, eliges un cargador con gestión dinámica para que no salte la luz.</li>
+        <li>Has medido la distancia del cuadro eléctrico a tu plaza. El electricista la necesita para el presupuesto.</li>
+        <li>Has medido de la pared a la toma del coche para elegir cable de 5 o de 7 metros.</li>
+        <li>Tienes el presupuesto de un electricista autorizado que te entregará el boletín.</li>
+        <li>Si aparcas en un garaje comunitario, lo comunicas por escrito a la comunidad antes de instalar.</li>
+        <li>Vas a programar la carga en horas valle, cuando la luz es más barata.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ================= CONFIGURACIÓN =================
+  // 1) Pegá acá tu ID de afiliada de Amazon.es (lo ves arriba a la derecha en afiliados.amazon.es).
+  //    Ejemplo: "enchufa-21". Mientras esté vacío, los botones llevan a Amazon sin tu ID y no cobrás comisión.
+  const AMAZON_TAG = "";
+
+  // 2) Opcional: dirección de tu formulario de suscriptores (Brevo, Mailchimp, Formspree...).
+  //    Vacío = el popup muestra la checklist pero no guarda el email en ningún lado.
+  const NEWSLETTER_URL = "";
+
+  // 3) Productos. Para agregar uno, copiá un bloque y cambiá el ASIN (el código que aparece en la URL de Amazon: /dp/XXXXXXXXXX).
+  //    En "img" podés pegar el link de la imagen que te da la barra de afiliados de Amazon. Vacío = dibujo.
+  const PRODUCTOS = [
+    {
+      asin: "B095B29DFH", marca: "Wallbox", nombre: "Pulsar Plus · cable 5 m", dibujo: "wallbox",
+      etiqueta: "Recomendado", destacado: true,
+      specs: [["Potencia", "7,4 kW"], ["Conector", "Tipo 2"], ["Cable", "5 m"], ["Conexión", "WiFi · Bluetooth"]],
+      ideal: "quieres un wallbox muy compacto y una app cómoda para programar la carga en horas valle.",
+      nota: "Para que no salte la luz con poca potencia contratada, añade el medidor de potencia (se vende aparte).",
+      img: ""
+    },
+    {
+      asin: "B09H5VGQ8N", marca: "Wallbox", nombre: "Pulsar Plus · cable 7 m", dibujo: "wallbox",
+      etiqueta: "Cable largo",
+      specs: [["Potencia", "7,4 kW"], ["Conector", "Tipo 2"], ["Cable", "7 m"], ["Conexión", "WiFi · Bluetooth"]],
+      ideal: "el cargador va a quedar lejos de la toma del coche o no siempre aparcas en la misma posición.",
+      img: ""
+    },
+    {
+      asin: "B0BCKY137L", marca: "V2C", nombre: "Trydan con protecciones", dibujo: "wallbox",
+      etiqueta: "Placas solares",
+      specs: [["Potencia", "7,4 kW"], ["Conector", "Tipo 2"], ["Cable", "5 m"], ["Gestión dinámica", "Incluida"]],
+      ideal: "tienes placas solares o quieres controlar la carga con Alexa o Home Assistant.",
+      nota: "Fabricado en Valencia. Lleva las protecciones eléctricas dentro del propio cargador.",
+      img: ""
+    },
+    {
+      asin: "B089T5VV6F", marca: "Wallbox", nombre: "Medidor de potencia monofásico", dibujo: "medidor",
+      etiqueta: "Complemento",
+      specs: [["Función", "Gestión dinámica"], ["Se instala en", "Cuadro eléctrico"], ["Para", "Wallbox Pulsar"], ["Extra", "Carga con placas"]],
+      ideal: "vas a comprar un Wallbox Pulsar y tienes poca potencia contratada en casa.",
+      nota: "Ajusta la potencia de carga según lo que consume la casa en cada momento.",
+      img: ""
+    },
+    {
+      asin: "B07S1QRRD7", marca: "Morec", nombre: "Cargador portátil Schuko", dibujo: "portatil",
+      etiqueta: "Portátil",
+      specs: [["Potencia", "Hasta 3,6 kW"], ["Conector", "Tipo 2"], ["Cable", "6 m"], ["Enchufe", "Schuko 10/16 A"]],
+      ideal: "vives de alquiler, no puedes instalar un wallbox o quieres un cargador de repuesto para viajar.",
+      img: ""
+    },
+    {
+      asin: "B0FPM7K4TF", marca: "GONEO", nombre: "Cargador portátil con sensor de temperatura", dibujo: "portatil",
+      etiqueta: "Portátil",
+      specs: [["Potencia", "3,68 kW"], ["Conector", "Tipo 2"], ["Cable", "5 m"], ["Protección", "AC 30 mA + DC 6 mA"]],
+      ideal: "quieres un portátil con más protecciones. En Amazon lo encuentras también con cable de 8, 10 o 15 m.",
+      img: ""
+    }
+  ];
+  // ==================================================
+
+  const $ = (s, el = document) => el.querySelector(s);
+  const esc = (t) => String(t).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const urlAmazon = (asin) => "https://www.amazon.es/dp/" + encodeURIComponent(asin) + (AMAZON_TAG ? "?tag=" + encodeURIComponent(AMAZON_TAG) : "");
+
+  // ---------- Tarjetas ----------
+  function tarjeta(p) {
+    const media = p.img
+      ? `<img src="${esc(p.img)}" alt="${esc(p.marca + " " + p.nombre)}" loading="lazy">`
+      : `<svg aria-hidden="true"><use href="#ill-${esc(p.dibujo)}"/></svg>`;
+    const specs = p.specs.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("");
+    return `
+      <article class="card">
+        <div class="card-media">${media}<span class="badge${p.destacado ? " is-top" : ""}">${esc(p.etiqueta)}</span></div>
+        <div class="card-body">
+          <div class="card-title"><p class="card-brand">${esc(p.marca)}</p><h3>${esc(p.nombre)}</h3></div>
+          <dl class="specs">${specs}</dl>
+          <p class="card-ideal"><strong>Ideal si</strong> ${esc(p.ideal)}</p>
+          ${p.nota ? `<p class="card-note">${esc(p.nota)}</p>` : ""}
+          <a class="btn btn-primary btn-buy" href="${urlAmazon(p.asin)}" target="_blank" rel="nofollow sponsored noopener">
+            Ver precio en Amazon <svg aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </div>
+      </article>`;
+  }
+  $("#productos").innerHTML = PRODUCTOS.map(tarjeta).join("");
+
+  // ---------- Calculadora de tiempos ----------
+  const EFICIENCIA = 0.9, CONSUMO_KWH_KM = 0.15;
+  const rango = $("#bateria"), salida = $("#bateria-out");
+  const filas = [...document.querySelectorAll("#filas .row")];
+  const horas = (bat, kw) => (bat * 0.6) / (kw * EFICIENCIA);
+  function formatoHoras(h) {
+    const total = Math.round((h * 60) / 5) * 5;
+    const hh = Math.floor(total / 60), mm = total % 60;
+    if (hh === 0) return `${mm} min`;
+    return mm ? `${hh} h ${mm} min` : `${hh} h`;
+  }
+  function calcular() {
+    const bat = Number(rango.value);
+    salida.textContent = `${bat} kWh`;
+    const max = Math.max(...filas.map(f => horas(bat, Number(f.dataset.kw))));
+    filas.forEach(f => {
+      const kw = Number(f.dataset.kw), h = horas(bat, kw);
+      f.querySelector(".bar i").style.width = `${(h / max) * 100}%`;
+      f.querySelector(".row-val strong").textContent = formatoHoras(h);
+      f.querySelector(".row-val span").textContent = `${Math.round((kw * EFICIENCIA) / CONSUMO_KWH_KM)} km por hora`;
+    });
+  }
+  rango.addEventListener("input", calcular);
+  calcular();
+
+  // ---------- Popup de salida (suscriptores) ----------
+  const modal = $("#popup"), form = $("#popup-form"), email = $("#popup-email"), error = $("#popup-error");
+  let yaMostrado = false, focoPrevio = null;
+  const leerSesion = () => { try { return sessionStorage.getItem("enchufa_popup") === "1"; } catch (e) { return false; } };
+  const guardarSesion = () => { try { sessionStorage.setItem("enchufa_popup", "1"); } catch (e) {} };
+
+  function abrirPopup(forzar = false) {
+    if (!forzar && (yaMostrado || leerSesion())) return;
+    yaMostrado = true; guardarSesion();
+    focoPrevio = document.activeElement;
+    modal.hidden = false;
+    ( $("#popup-paso2").hidden ? email : $(".modal-x", modal) ).focus();
+  }
+  function cerrarPopup() {
+    modal.hidden = true;
+    if (focoPrevio && focoPrevio.focus) focoPrevio.focus();
+  }
+  modal.addEventListener("click", (e) => { if (e.target.closest("[data-cerrar]")) cerrarPopup(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.hidden) cerrarPopup(); });
+  $("#abrir-checklist").addEventListener("click", () => abrirPopup(true));
+
+  // Escritorio: cuando el cursor sale por arriba de la ventana (solo después de 8 s y de que la persona haya movido el ratón).
+  // Móvil: a los 45 segundos.
+  let armado = false, tiempoOk = false;
+  setTimeout(() => { tiempoOk = true; }, 8000);
+  document.addEventListener("mousemove", (e) => { if (e.clientY > 60) armado = true; }, { passive: true });
+  document.addEventListener("mouseout", (e) => {
+    if (armado && tiempoOk && !e.relatedTarget && e.clientY <= 0) abrirPopup();
+  });
+  if (window.matchMedia && matchMedia("(pointer: coarse)").matches) setTimeout(() => abrirPopup(), 45000);
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const valor = email.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(valor)) { error.hidden = false; email.focus(); return; }
+    error.hidden = true;
+    if (NEWSLETTER_URL) {
+      const datos = new FormData(); datos.append("email", valor);
+      fetch(NEWSLETTER_URL, { method: "POST", body: datos, mode: "no-cors" }).catch(() => {});
+    }
+    $("#popup-paso1").hidden = true;
+    $("#popup-paso2").hidden = false;
+    $(".modal-x", modal).focus();
+  });
+</script>
+</body>
+</html>
